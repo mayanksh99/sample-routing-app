@@ -1,68 +1,224 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# react-otp-input
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-## Available Scripts
+[![npm version](https://badge.fury.io/js/react-otp-input.svg)](https://badge.fury.io/js/react-otp-input) [![npm](https://img.shields.io/npm/dw/react-otp-input.svg?logo=npm)](https://www.npmjs.com/package/react-otp-input)
 
-In the project directory, you can run:
+A fully customizable, one-time password input component for the web built with React.
 
-### `npm start`
+![see here](https://media.giphy.com/media/lN98dFU6h3oP0wWS5x/giphy.gif)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Live Demo](https://devfolioco.github.io/react-otp-input)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+[CodeSandbox](https://codesandbox.io/s/react-otp-input-demo-v2-1iy52)
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[![NPM](https://nodei.co/npm/react-otp-input.png?compact=true)](https://nodei.co/npm/react-otp-input/)
 
-### `npm run build`
+#### To install the latest stable version:
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+npm install --save react-otp-input
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### Basic usage:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```jsx
+import React, { Component } from 'react';
+import OtpInput from 'react-otp-input';
 
-### `npm run eject`
+export default class App extends Component {
+  state = { otp: '' };
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  handleChange = otp => this.setState({ otp });
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  render() {
+    return (
+      <OtpInput
+        value={this.state.otp}
+        onChange={this.handleChange}
+        numInputs={6}
+        separator={<span>-</span>}
+      />
+    );
+  }
+}
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## API
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<table>
+  <tr>
+    <th>Name<br/></th>
+    <th>Type</th>
+    <th>Required</th>
+    <th>Default</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>numInputs</td>
+    <td>number</td>
+    <td>true</td>
+    <td>4</td>
+    <td>Number of OTP inputs to be rendered.</td>
+  </tr>
+  <tr>
+    <td>onChange</td>
+    <td>function</td>
+    <td>true</td>
+    <td>console.log</td>
+    <td>Returns OTP code typed in inputs.</td>
+  </tr>
+  <tr>
+    <td>value</td>
+    <td>string / number</td>
+    <td>true</td>
+    <td>''</td>
+    <td>The value of the OTP passed into the component.</td>
+  </tr>
+  <!-- <tr>
+    <td>placeholder</td>
+    <td>string</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Provide a custom placeholder. Should be a single character or a string of length <code>numInputs</code>.</td>
+  </tr> -->
+  <tr>
+    <td>separator</td>
+    <td>component<br/></td>
+    <td>false</td>
+    <td>none</td>
+    <td>Provide a custom separator between inputs by passing a component. For instance, <code>&lt;span&gt;-&lt;/span&gt;</code> would add <code>-</code> between each input</td>
+  </tr>
+  <tr>
+    <td>containerStyle</td>
+    <td>style (object) / className (string)</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Style applied or class passed to container of inputs.</td>
+  </tr>
+  <tr>
+    <td>inputStyle</td>
+    <td>style (object) / className (string)</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Style applied or class passed to each input.</td>
+  </tr>
+  <tr>
+    <td>focusStyle</td>
+    <td>style (object) / className (string)</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Style applied or class passed to inputs on focus.</td>
+  </tr>
+  <tr>
+    <td>isDisabled</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Disables all the inputs.</td>
+  </tr>
+  <tr>
+    <td>disabledStyle</td>
+    <td>style (object) / className (string)</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Style applied or class passed to each input when disabled.</td>
+  </tr>
+  <tr>
+    <td>hasErrored</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Indicates there is an error in the inputs.</td>
+  </tr>
+  <tr>
+    <td>errorStyle</td>
+    <td>style (object) / className (string)</td>
+    <td>false</td>
+    <td>none</td>
+    <td>Style applied or class passed to each input when errored.</td>
+  </tr>
+  <tr>
+    <td>shouldAutoFocus</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Auto focuses input on initial page load.</td>
+  </tr>
+  <tr>
+    <td>isInputNum</td>
+    <td>boolean</td>
+    <td>false</td>
+    <td>false</td>
+    <td>Restrict input to only numbers.</td>
+  </tr>
+</table>
 
-## Learn More
+## Breaking changes when porting to v1.0.0
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`react-otp-input` is now a controlled component to facilitate functionalities that weren't possible before from the application using it, such as clearing or pre-assigning values. For `v1.0.0` and above, a `value` prop needs to be passed in the component for it to function as expected.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Development
 
-### Code Splitting
+#### To run the development server:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+```
+npm run dev
+```
 
-### Analyzing the Bundle Size
+#### To run the development server for example:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+```
+npm run docs
+```
 
-### Making a Progressive Web App
+#### To make a production build of the example:
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+```
+npm run docs:prod
+```
 
-### Advanced Configuration
+## Checklist
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat&logo=github)](https://github.com/devfolioco/react-otp-input/pulls) [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/devfolioco/react-otp-input)
 
-### Deployment
+- [x] Add flowtypes
+- [x] Add ESLint, Prettier for code quality
+- [x] Add styling support for states including focus/disabled
+- [ ] Travis CI, Codecov
+- [ ] Write tests
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+## Contributing
 
-### `npm run build` fails to minify
+[![GitHub issues](https://img.shields.io/github/issues-raw/devfolioco/react-otp-input?logo=github)](https://github.com/devfolioco/react-otp-input/issues) [![GitHub pull requests](https://img.shields.io/github/issues-pr/devfolioco/react-otp-input?logo=git)](https://github.com/devfolioco/react-otp-input/pulls)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Feel free to open [issues](https://github.com/devfolioco/react-otp-input/issues/new/choose) and [pull requests](https://github.com/devfolioco/react-otp-input/pulls)!
+
+## License
+
+[![NPM](https://img.shields.io/npm/l/react-otp-input)](https://github.com/devfolioco/react-otp-input/blob/master/LICENSE)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/apollonian"><img src="https://avatars2.githubusercontent.com/u/2150306?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Abhishek Warokar</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=apollonian" title="Code">💻</a> <a href="#design-apollonian" title="Design">🎨</a> <a href="#maintenance-apollonian" title="Maintenance">🚧</a> <a href="#ideas-apollonian" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/devfolioco/react-otp-input/pulls?q=is%3Apr+reviewed-by%3Aapollonian" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://ajayns.me"><img src="https://avatars0.githubusercontent.com/u/20743219?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aj</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=ajayns" title="Code">💻</a> <a href="#design-ajayns" title="Design">🎨</a> <a href="#ideas-ajayns" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="http://aromalanil.me"><img src="https://avatars1.githubusercontent.com/u/49222186?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Aromal Anil</b></sub></a><br /><a href="https://github.com/devfolioco/react-otp-input/commits?author=aromalanil" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
